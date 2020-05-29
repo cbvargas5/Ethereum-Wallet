@@ -6,12 +6,11 @@ import InfoDisplay from './components/InfoDisplay';
 import GenerateButton from './components/GenerateButton';
 import {StyleSheet, Text, View} from 'react-native';
 import wallet from 'eth-wallet-light'
-// const wallet = require('eth-wallet-light')
 
 const App = props => {
   // console.log(crypto.randomBytes(32).toString('hex'))
-  // const test = new wallet.Keystore()
-  // console.log(test)
+  const keystore = new wallet.Keystore()
+  console.log(keystore)
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Ethereum Wallet</Text>
