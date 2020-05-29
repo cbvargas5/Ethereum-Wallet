@@ -1,5 +1,5 @@
 import './shim.js'
-import crypto from 'crypto'
+import keccak256 from 'keccak256'
 import React, { useState, useEffect } from 'react';
 import Card from './components/Card';
 import InfoDisplay from './components/InfoDisplay';
@@ -21,7 +21,8 @@ const App = props => {
       .then((keystore) => {
         setPublicKey(keystore.getAddress())
         setPrivateKey(keystore.getPrivateKey(password))
-        console.log('Mnemonic -->', keystore.getMnemonic(password))
+        // console.log('Mnemonic -->', keystore.getMnemonic(password))
+        console.log('Euth -->', keccak256(keystore.getAddress()).toString('hex'))
         
       })
       .catch((err) => console.log(err))
