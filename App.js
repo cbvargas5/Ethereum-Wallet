@@ -34,10 +34,11 @@ const App = props => {
 
   useEffect(() => {
     AsyncStorage.getItem('Mnemonic')
-      .then((value) => {
+      .then(async(value) => {
         if (!value || isReset) {
           const csprng = () => randomBytes(32).toString('hex')
-          new wallet.Keystore(csprng).initializeFromEntropy('entropy', password)
+          const entropy = await csprng()
+          new wallet.Keystore(csprng).initializeFromEntropy(entropy, password)
             .then(async (keystore) => {
               setIsLoading(false)
               setPublicAddress(keystore.getAddress())
