@@ -1,16 +1,17 @@
-// import './shim.js'
-// import crypto from 'crypto'
+import './shim.js'
+import crypto from 'crypto'
 import React from 'react';
 import Card from './components/Card';
 import InfoDisplay from './components/InfoDisplay';
 import GenerateButton from './components/GenerateButton';
 import {StyleSheet, Text, View} from 'react-native';
-// import wallet from 'eth-wallet-light'
+import wallet from 'eth-wallet-light'
 // const wallet = require('eth-wallet-light')
 
 const App = props => {
   // console.log(crypto.randomBytes(32).toString('hex'))
-  console.log('test')
+  // const test = new wallet.Keystore()
+  // console.log(test)
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Ethereum Wallet</Text>
@@ -18,7 +19,7 @@ const App = props => {
         <View>
           <InfoDisplay
             type="Ethereum Address"
-            value={'ghsdfkgjh345i3h463ikjbntest'}
+            value={'ghsdfkgjh345i3h463ikjbn1234'}
           />
           <InfoDisplay
             type="Public Key"
