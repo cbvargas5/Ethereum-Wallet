@@ -4,7 +4,9 @@ import Card from './components/Card';
 import InfoDisplay from './components/InfoDisplay';
 import GenerateButton from './components/GenerateButton';
 import {StyleSheet, Text, View} from 'react-native';
-import wallet from 'eth-wallet-light'
+import wallet from 'eth-wallet-light';
+// import { generateSecureRandom } from 'react-native-securerandom';
+
 
 const App = props => {
 
@@ -25,9 +27,6 @@ const App = props => {
       })
       .catch((err) => console.log(err))
   }, [])
-  console.log('address key -->', publicAddress)
-  console.log('private key -->', privateKey)
-
 
   return (
     <View style={styles.container}>
