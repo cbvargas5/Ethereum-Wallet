@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 const GenerateButton = (props) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} style={styles.container}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.container} onPress={props.handlePress}>
       <Text style={styles.text}>{props.children}</Text>
     </TouchableOpacity>
   )

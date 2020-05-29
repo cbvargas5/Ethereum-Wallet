@@ -24,13 +24,14 @@ const App = props => {
   useEffect(() => {
     AsyncStorage.getItem('Mnemonic')
       .then((value) => {
-        if (!value) {
+        if (!value || isReset) {
           new wallet.Keystore().initializeFromEntropy('entropy', password)
             .then(async (keystore) => {
               setPublicAddress(keystore.getAddress())
               setPrivateKey(keystore.getPrivateKey(password))
               const newMnemonic = keystore.getMnemonic(password)
               await AsyncStorage.setItem('Mnemonic', newMnemonic)
+              setIsReset(false)
             })
         } else {
           console.log('restoring!')
@@ -49,9 +50,7 @@ console.log('RENDER', isReset)
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title} onPress={() => {
-        generateNewWallet()
-      }}>Ethereum Wallet</Text>
+      <Text style={styles.title}>Ethereum Wallet</Text>
       <Card>
         <View>
           <InfoDisplay
@@ -68,7 +67,7 @@ console.log('RENDER', isReset)
           />
         </View>
       </Card>
-      <GenerateButton>Generate New Wallet</GenerateButton>
+      <GenerateButton handlePress={generateNewWallet}>Generate New Wallet</GenerateButton>
     </View>
   );
 };
