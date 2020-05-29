@@ -1,27 +1,16 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-const InfoDisplay = props => {
-  return props.isLoading
-  ?
+const InfoDisplay = props => 
   (
     <View style={styles.container}>
       <Text style={styles.text}>{props.type}</Text>
       <View style={styles.contentContainer}>
-        <Text style={styles.content}>---LOADING WALLET---</Text>
+        <Text style={styles.content} selectable={true}>{props.isLoading ? '---LOADING WALLET---' : props.value}</Text>
       </View>
     </View>
   )
-  :
-  (
-    <View style={styles.container}>
-      <Text style={styles.text}>{props.type}</Text>
-      <View style={styles.contentContainer}>
-        <Text style={styles.content}>{props.value}</Text>
-      </View>
-    </View>
-  )
-};
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
