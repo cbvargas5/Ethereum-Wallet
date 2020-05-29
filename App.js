@@ -71,8 +71,8 @@ const App = props => {
             isLoading={isLoading}
           />
           <TouchableOpacity activeOpacity={0.7} style={styles.displayButton} onPress={handlePrivateDisplay}>
-            <Text>
-              {isDisplayed ? 'hide' : 'show'}
+            <Text style={styles.displayButtonText}>
+              {isDisplayed ? 'Hide' : 'Show'}
             </Text>
           </TouchableOpacity>
         </View>
@@ -109,6 +109,10 @@ const styles = StyleSheet.create({
     shadowColor: '#333',
     shadowOpacity: 0.5,
     alignItems: 'center',
+  },
+  displayButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   }
 });
 export default App;
