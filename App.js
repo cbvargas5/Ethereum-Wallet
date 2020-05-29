@@ -17,7 +17,6 @@ const App = props => {
 
   useEffect(() => {
     //will need to write logic to persist data so that we generate the same key pairs on device
-    //will likely persist Mnemonic to restore old key pairs
     new wallet.Keystore().initializeFromEntropy('entropy', password)
       .then((keystore) => {
         setPublicAddress(keystore.getAddress())
@@ -25,7 +24,6 @@ const App = props => {
         // console.log('Mnemonic -->', keystore.getMnemonic(password))
         
       })
-      .catch((err) => console.log(err))
   }, [])
 
   return (
