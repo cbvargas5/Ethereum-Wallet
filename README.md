@@ -18,9 +18,9 @@ run command: npm android
 ## Using Ethereum Wallet
 
 ```
-* On initial load, application will generate new Ehtereum Wallet
+On initial load, application will generate new Ethereum Wallet
 
-* When ready, press "Generate New Wallet" to generate new wallet
+When ready, press "Generate New Wallet" to generate new wallet
 ```
 
 Add run commands and examples you think users will find useful. Provide an options reference for bonus points!
