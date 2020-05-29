@@ -1,5 +1,4 @@
 import './shim.js'
-import keccak256 from 'keccak256'
 import React, { useState, useEffect } from 'react';
 import Card from './components/Card';
 import InfoDisplay from './components/InfoDisplay';
@@ -10,7 +9,7 @@ import wallet from 'eth-wallet-light'
 const App = props => {
 
   const [privateKey, setPrivateKey] = useState('')
-  const [publicKey, setPublicKey] = useState('')
+  const [publicAddress, setPublicAddress] = useState('')
 
   const password = 'will change later'
 
@@ -19,15 +18,14 @@ const App = props => {
     //will likely persist Mnemonic to restore old key pairs
     new wallet.Keystore().initializeFromEntropy('entropy', password)
       .then((keystore) => {
-        setPublicKey(keystore.getAddress())
+        setPublicAddress(keystore.getAddress())
         setPrivateKey(keystore.getPrivateKey(password))
         // console.log('Mnemonic -->', keystore.getMnemonic(password))
-        console.log('Euth -->', keccak256(keystore.getAddress()).toString('hex'))
         
       })
       .catch((err) => console.log(err))
   }, [])
-  console.log('address key -->', publicKey)
+  console.log('address key -->', publicAddress)
   console.log('private key -->', privateKey)
 
 
@@ -38,12 +36,12 @@ const App = props => {
         <View>
           <InfoDisplay
             type="Ethereum Address"
-            value={'ghsdfkgjh345i3h463ikjbn1234'}
+            value={publicAddress}
           />
-          <InfoDisplay
-            type="Public Key"
-            value={publicKey}
-          />
+          {/* <InfoDisplay
+            type="Public Address"
+            value={publicAddress}
+          /> */}
           <InfoDisplay
             type="Private Key"
             value={privateKey}
