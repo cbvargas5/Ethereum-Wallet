@@ -72,7 +72,7 @@ const App = props => {
           />
           <TouchableOpacity activeOpacity={0.7} style={styles.displayButton} onPress={handlePrivateDisplay}>
             <Text>
-              image
+              {isDisplayed ? 'hide' : 'show'}
             </Text>
           </TouchableOpacity>
         </View>
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 2 },
     shadowColor: '#333',
     shadowOpacity: 0.5,
-    // alignItems: 'center',
+    alignItems: 'center',
   }
 });
 export default App;
