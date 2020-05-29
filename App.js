@@ -10,19 +10,23 @@ import wallet from 'eth-wallet-light'
 const App = props => {
 
   const [privateKey, setPrivateKey] = useState('')
-  const [publicAddress, setPublicAddress] = useState('')
+  const [publicKey, setPublicKey] = useState('')
 
   const password = 'will change later'
 
   useEffect(() => {
     //will need to write logic to persist data so that we generate the same key pairs on device
+    //will likely persist Mnemonic to restore old key pairs
     new wallet.Keystore().initializeFromEntropy('entropy', password)
       .then((keystore) => {
-        setPublicAddress(keystore.getAddress())
+        setPublicKey(keystore.getAddress())
         setPrivateKey(keystore.getPrivateKey(password))
+        console.log('Mnemonic -->', keystore.getMnemonic(password))
+        
       })
+      .catch((err) => console.log(err))
   }, [])
-  console.log('address key -->', publicAddress)
+  console.log('address key -->', publicKey)
   console.log('private key -->', privateKey)
 
 
@@ -37,7 +41,7 @@ const App = props => {
           />
           <InfoDisplay
             type="Public Key"
-            value={publicAddress}
+            value={publicKey}
           />
           <InfoDisplay
             type="Private Key"
