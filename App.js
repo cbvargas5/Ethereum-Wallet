@@ -13,11 +13,15 @@ const App = props => {
 
   const [privateKey, setPrivateKey] = useState('')
   const [publicAddress, setPublicAddress] = useState('')
+  const [isReset, setIsReset] = useState(false)
 
   const password = 'will change later'
 
-  useEffect(() => {
+  const generateNewWallet = useCallback(() => {
+    isReset ? setIsReset(false) : setIsReset(false)
+  }, [])
 
+  useEffect(() => {
     AsyncStorage.getItem('Mnemonic')
       .then((value) => {
         if (!value) {
@@ -25,7 +29,8 @@ const App = props => {
             .then(async (keystore) => {
               setPublicAddress(keystore.getAddress())
               setPrivateKey(keystore.getPrivateKey(password))
-              await AsyncStorage.setItem('Mnemonic', keystore.getMnemonic(password))
+              const newMnemonic = keystore.getMnemonic(password)
+              await AsyncStorage.setItem('Mnemonic', newMnemonic)
             })
         } else {
           new wallet.Keystore().restoreFromMnemonic(value, password)
@@ -35,8 +40,11 @@ const App = props => {
             })
         }
       })
+  }, [isReset])
 
-  }, [])
+  // generateNewWallet()
+
+console.log('RENDER', isReset)
 
   return (
     <View style={styles.container}>
