@@ -19,8 +19,7 @@ const styles = StyleSheet.create({
     shadowColor: '#333',
     shadowOpacity: 0.6,
     shadowRadius: 10,
-    width: '90%'
-
+    width: '90%',
   },
   content: {
     marginVertical: 50
