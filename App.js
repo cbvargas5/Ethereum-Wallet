@@ -1,16 +1,28 @@
 import './shim.js'
 import crypto from 'crypto'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './components/Card';
 import InfoDisplay from './components/InfoDisplay';
 import GenerateButton from './components/GenerateButton';
 import {StyleSheet, Text, View} from 'react-native';
 import wallet from 'eth-wallet-light'
 
-const App = props => {
-  // console.log(crypto.randomBytes(32).toString('hex'))
-  const keystore = new wallet.Keystore()
-  console.log(keystore)
+const App = (props) => {
+
+  const [privateKey, setPrivateKey] = useState('')
+  const [publicAddress, setpublicAddress] = useState('')
+  
+  const password = 'will change later'
+
+  useEffect(() => {
+    //will need to write logic to persist data so that we generate the same key pairs on device
+    new wallet.Keystore().initializeFromEntropy('entropy', password)
+      .then((keystore) => {
+        setpublicAddress(keystore.getAddress())
+      })
+  }, [])
+  console.log('address key -->', publicAddress)
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Ethereum Wallet</Text>
@@ -22,7 +34,7 @@ const App = props => {
           />
           <InfoDisplay
             type="Public Key"
-            value={'09drgjhd0f9gjd0f9g8jd0f9h8s'}
+            value={publicAddress}
           />
           <InfoDisplay
             type="Private Key"
