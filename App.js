@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Card from './components/Card';
 import InfoDisplay from './components/InfoDisplay';
 import GenerateButton from './components/GenerateButton';
-import {StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import wallet from 'eth-wallet-light';
 // import AsyncStorage from '@react-native-community/async-storage';
 // import { generateSecureRandom } from 'react-native-securerandom';
@@ -17,9 +17,9 @@ const App = props => {
 
   const password = 'will change later'
 
-  const generateNewWallet = useCallback(() => {
-    isReset ? setIsReset(false) : setIsReset(false)
-  }, [])
+  const generateNewWallet = () => {
+    isReset ? setIsReset(false) : setIsReset(true)
+  }
 
   useEffect(() => {
     AsyncStorage.getItem('Mnemonic')
@@ -33,6 +33,7 @@ const App = props => {
               await AsyncStorage.setItem('Mnemonic', newMnemonic)
             })
         } else {
+          console.log('restoring!')
           new wallet.Keystore().restoreFromMnemonic(value, password)
             .then(async (keystore) => {
               setPublicAddress(keystore.getAddress())
@@ -48,7 +49,9 @@ console.log('RENDER', isReset)
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Ethereum Wallet</Text>
+      <Text style={styles.title} onPress={() => {
+        generateNewWallet()
+      }}>Ethereum Wallet</Text>
       <Card>
         <View>
           <InfoDisplay
