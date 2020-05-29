@@ -7,21 +7,24 @@ import GenerateButton from './components/GenerateButton';
 import {StyleSheet, Text, View} from 'react-native';
 import wallet from 'eth-wallet-light'
 
-const App = (props) => {
+const App = props => {
 
   const [privateKey, setPrivateKey] = useState('')
-  const [publicAddress, setpublicAddress] = useState('')
-  
+  const [publicAddress, setPublicAddress] = useState('')
+
   const password = 'will change later'
 
   useEffect(() => {
     //will need to write logic to persist data so that we generate the same key pairs on device
     new wallet.Keystore().initializeFromEntropy('entropy', password)
       .then((keystore) => {
-        setpublicAddress(keystore.getAddress())
+        setPublicAddress(keystore.getAddress())
+        setPrivateKey(keystore.getPrivateKey(password))
       })
   }, [])
   console.log('address key -->', publicAddress)
+  console.log('private key -->', privateKey)
+
 
   return (
     <View style={styles.container}>
@@ -38,7 +41,7 @@ const App = (props) => {
           />
           <InfoDisplay
             type="Private Key"
-            value={'98fshs8dr7ghs0dh8sf089jhwy'}
+            value={privateKey}
           />
         </View>
       </Card>
