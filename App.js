@@ -14,10 +14,13 @@ const App = props => {
   const [privateKey, setPrivateKey] = useState('')
   const [publicAddress, setPublicAddress] = useState('')
   const [isReset, setIsReset] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
-  const password = 'will change later'
+
+  const password = 'password'
 
   const generateNewWallet = () => {
+    isLoading ? setIsLoading(false) : setIsLoading(true)
     isReset ? setIsReset(false) : setIsReset(true)
   }
 
@@ -27,6 +30,7 @@ const App = props => {
         if (!value || isReset) {
           new wallet.Keystore().initializeFromEntropy('entropy', password)
             .then(async (keystore) => {
+              setIsLoading(false)
               setPublicAddress(keystore.getAddress())
               setPrivateKey(keystore.getPrivateKey(password))
               await AsyncStorage.setItem('Mnemonic', keystore.getMnemonic(password))
@@ -36,16 +40,13 @@ const App = props => {
           console.log('restoring!')
           new wallet.Keystore().restoreFromMnemonic(value, password)
             .then(async (keystore) => {
+              setIsLoading(false)
               setPublicAddress(keystore.getAddress())
               setPrivateKey(keystore.getPrivateKey(password))
             })
         }
       })
   }, [isReset])
-
-  // generateNewWallet()
-
-console.log('RENDER', isReset)
 
   return (
     <View style={styles.container}>
@@ -55,6 +56,7 @@ console.log('RENDER', isReset)
           <InfoDisplay
             type="Ethereum Address"
             value={publicAddress}
+            isLoading={isLoading}
           />
           {/* <InfoDisplay
             type="Public Address"
@@ -63,6 +65,7 @@ console.log('RENDER', isReset)
           <InfoDisplay
             type="Private Key"
             value={privateKey}
+            isLoading={isLoading}
           />
         </View>
       </Card>

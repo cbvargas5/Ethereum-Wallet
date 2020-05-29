@@ -8,7 +8,7 @@ const InfoDisplay = props => {
     <View style={styles.container}>
       <Text style={styles.text}>{props.type}</Text>
       <View style={styles.contentContainer}>
-        <Text style={styles.content}>...LOADING...</Text>
+        <Text style={styles.content}>---LOADING WALLET---</Text>
       </View>
     </View>
   )
