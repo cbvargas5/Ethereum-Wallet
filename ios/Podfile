@@ -79,6 +79,8 @@ target 'EthereumWallet' do
 
   pod 'react-native-randombytes', :path => '../node_modules/react-native-randombytes'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'EthereumWalletTests' do
     inherit! :complete
     # Pods for testing

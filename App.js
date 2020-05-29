@@ -1,10 +1,11 @@
 import './shim.js'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Card from './components/Card';
 import InfoDisplay from './components/InfoDisplay';
 import GenerateButton from './components/GenerateButton';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import wallet from 'eth-wallet-light';
+// import AsyncStorage from '@react-native-community/async-storage';
 // import { generateSecureRandom } from 'react-native-securerandom';
 
 
@@ -16,28 +17,26 @@ const App = props => {
   const password = 'will change later'
 
   useEffect(() => {
-    //will need to write logic to persist data so that we generate the same key pairs on device
-    new wallet.Keystore().initializeFromEntropy('entropy', password)
-      .then((keystore) => {
-        setPublicAddress(keystore.getAddress())
-        setPrivateKey(keystore.getPrivateKey(password))
-<<<<<<< HEAD
-<<<<<<< HEAD
-        // console.log('Mnemonic -->', keystore.getMnemonic(password))
-        
-      })
-  }, [])
-=======
-      })
-  }, [])
-=======
-      })
-  }, [])
->>>>>>> parent of f3f4ff3... wrote note as reminder to persist 'getMnemonic' data for restoring old key pair
-  console.log('address key -->', publicAddress)
-  console.log('private key -->', privateKey)
 
->>>>>>> parent of f3f4ff3... wrote note as reminder to persist 'getMnemonic' data for restoring old key pair
+    AsyncStorage.getItem('Mnemonic')
+      .then((value) => {
+        if (!value) {
+          new wallet.Keystore().initializeFromEntropy('entropy', password)
+            .then(async (keystore) => {
+              setPublicAddress(keystore.getAddress())
+              setPrivateKey(keystore.getPrivateKey(password))
+              await AsyncStorage.setItem('Mnemonic', keystore.getMnemonic(password))
+            })
+        } else {
+          new wallet.Keystore().restoreFromMnemonic(value, password)
+            .then(async (keystore) => {
+              setPublicAddress(keystore.getAddress())
+              setPrivateKey(keystore.getPrivateKey(password))
+            })
+        }
+      })
+
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -46,16 +45,6 @@ const App = props => {
         <View>
           <InfoDisplay
             type="Ethereum Address"
-<<<<<<< HEAD
-=======
-            value={'ghsdfkgjh345i3h463ikjbn1234'}
-          />
-          <InfoDisplay
-            type="Public Key"
-<<<<<<< HEAD
->>>>>>> parent of f3f4ff3... wrote note as reminder to persist 'getMnemonic' data for restoring old key pair
-=======
->>>>>>> parent of f3f4ff3... wrote note as reminder to persist 'getMnemonic' data for restoring old key pair
             value={publicAddress}
           />
           {/* <InfoDisplay
