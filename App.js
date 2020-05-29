@@ -3,8 +3,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Card from './components/Card';
 import InfoDisplay from './components/InfoDisplay';
 import GenerateButton from './components/GenerateButton';
-import { StyleSheet, Text, View, AsyncStorage, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage, TouchableOpacity } from 'react-native';
 import wallet from 'eth-wallet-light';
+import { randomBytes } from 'react-native-randombytes'
 
 
 // import AsyncStorage from '@react-native-community/async-storage';
@@ -35,7 +36,8 @@ const App = props => {
     AsyncStorage.getItem('Mnemonic')
       .then((value) => {
         if (!value || isReset) {
-          new wallet.Keystore().initializeFromEntropy('entropy', password)
+          const csprng = () => randomBytes(32).toString('hex')
+          new wallet.Keystore(csprng).initializeFromEntropy('entropy', password)
             .then(async (keystore) => {
               setIsLoading(false)
               setPublicAddress(keystore.getAddress())
