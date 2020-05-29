@@ -1,15 +1,11 @@
 import './shim.js'
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './components/Card';
 import InfoDisplay from './components/InfoDisplay';
 import GenerateButton from './components/GenerateButton';
 import { StyleSheet, Text, View, AsyncStorage, TouchableOpacity } from 'react-native';
 import wallet from 'eth-wallet-light';
 import { randomBytes } from 'react-native-randombytes'
-
-
-// import AsyncStorage from '@react-native-community/async-storage';
-// import { generateSecureRandom } from 'react-native-securerandom';
 
 
 const App = props => {
@@ -47,7 +43,6 @@ const App = props => {
               setIsReset(false)
             })
         } else {
-          console.log('restoring!')
           new wallet.Keystore().restoreFromMnemonic(value, password)
             .then(async (keystore) => {
               setIsLoading(false)
