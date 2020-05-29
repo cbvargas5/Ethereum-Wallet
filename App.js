@@ -22,6 +22,7 @@ const App = props => {
         setPublicAddress(keystore.getAddress())
         setPrivateKey(keystore.getPrivateKey(password))
 <<<<<<< HEAD
+<<<<<<< HEAD
         // console.log('Mnemonic -->', keystore.getMnemonic(password))
         
       })
@@ -29,6 +30,10 @@ const App = props => {
 =======
       })
   }, [])
+=======
+      })
+  }, [])
+>>>>>>> parent of f3f4ff3... wrote note as reminder to persist 'getMnemonic' data for restoring old key pair
   console.log('address key -->', publicAddress)
   console.log('private key -->', privateKey)
 
@@ -47,6 +52,9 @@ const App = props => {
           />
           <InfoDisplay
             type="Public Key"
+<<<<<<< HEAD
+>>>>>>> parent of f3f4ff3... wrote note as reminder to persist 'getMnemonic' data for restoring old key pair
+=======
 >>>>>>> parent of f3f4ff3... wrote note as reminder to persist 'getMnemonic' data for restoring old key pair
             value={publicAddress}
           />
