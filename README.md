@@ -4,7 +4,12 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/cbvargas5/Ethereum-Wallet)
 
 Ethereum Wallet is a ReactNative mobile application that allows users to generate and store a light Ethereum wallet with the click of a button.
+## Video Demo
 
+Follow this link for Video Demo of Ethereum Wallet
+```
+https://youtu.be/4RKaNWmbTVc
+```
 ## Installing
 
 To install Ethereum Wallet, follow these steps:
