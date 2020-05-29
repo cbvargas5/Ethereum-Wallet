@@ -2,14 +2,25 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 const InfoDisplay = props => {
-  return (
+  return props.isLoading
+  ?
+  (
+    <View style={styles.container}>
+      <Text style={styles.text}>{props.type}</Text>
+      <View style={styles.contentContainer}>
+        <Text style={styles.content}>...LOADING...</Text>
+      </View>
+    </View>
+  )
+  :
+  (
     <View style={styles.container}>
       <Text style={styles.text}>{props.type}</Text>
       <View style={styles.contentContainer}>
         <Text style={styles.content}>{props.value}</Text>
       </View>
     </View>
-  );
+  )
 };
 const styles = StyleSheet.create({
   container: {
@@ -18,10 +29,9 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: 6,
-    width: '85%',
+    width: '80%',
     borderRadius: 10,
     backgroundColor: '#40cbac',
-    // paddingVertical: 8,
     elevation: 5,
     shadowOffset: {width: 1, height: 2},
     shadowColor: '#333',
@@ -31,7 +41,7 @@ const styles = StyleSheet.create({
   content: {
     color: '#f9f9f9',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 17,
   },
 });
 

@@ -29,8 +29,7 @@ const App = props => {
             .then(async (keystore) => {
               setPublicAddress(keystore.getAddress())
               setPrivateKey(keystore.getPrivateKey(password))
-              const newMnemonic = keystore.getMnemonic(password)
-              await AsyncStorage.setItem('Mnemonic', newMnemonic)
+              await AsyncStorage.setItem('Mnemonic', keystore.getMnemonic(password))
               setIsReset(false)
             })
         } else {
