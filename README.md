@@ -8,7 +8,7 @@ Ethereum Wallet is a ReactNative mobile application that allows users to generat
 
 Follow this link for Video Demo of Ethereum Wallet
 ```
-https://youtu.be/4RKaNWmbTVc
+[Demo Youtube Link](https://youtu.be/4RKaNWmbTVc)
 ```
 ## Installing
 
